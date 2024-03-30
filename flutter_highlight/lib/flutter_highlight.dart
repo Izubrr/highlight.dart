@@ -90,10 +90,18 @@ class HighlightView extends StatelessWidget {
     return Container(
       color: theme[_rootKey]?.backgroundColor ?? _defaultBackgroundColor,
       padding: padding,
-      child: RichText(
-        text: TextSpan(
+      child: SelectableText.rich(
+        TextSpan(
           style: _textStyle,
           children: _convert(highlight.parse(source, language: language).nodes!),
+        ),
+        // Включение тулбара с опциями копирования, вырезания и вставки
+        showCursor: true,
+        toolbarOptions: ToolbarOptions(
+          copy: true,
+          selectAll: true,
+          cut: false,
+          paste: false,
         ),
       ),
     );
